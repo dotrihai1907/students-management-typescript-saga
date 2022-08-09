@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Box,
   Button,
@@ -7,7 +6,9 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+
 import { authActions } from "../authSlice";
 
 export default function LoginPage() {
