@@ -1,11 +1,19 @@
 import * as React from "react";
 
-import { Box, Button, Paper, Typography } from "@mui/material";
-import { useAppDispatch } from "../../../app/hooks";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { authActions } from "../authSlice";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
+
+  const isLogging = useAppSelector((state) => state.auth.logging);
 
   const handleLoginClick = () => {
     dispatch(
@@ -38,6 +46,13 @@ export default function LoginPage() {
             color="primary"
             onClick={handleLoginClick}
           >
+            {isLogging && (
+              <CircularProgress
+                size={20}
+                color="info"
+                sx={{ marginRight: "20px" }}
+              />
+            )}
             Fake Login
           </Button>
         </Box>
