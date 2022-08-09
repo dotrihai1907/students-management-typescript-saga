@@ -1,7 +1,11 @@
 import * as React from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
+import { Route, Switch } from "react-router-dom";
+
 import { Header, Sidebar } from "../Common";
+import Dashboard from "../../features/dashboard";
+import StudentFeature from "../../features/student";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +40,12 @@ export function AdminLayout() {
       <Box className={classes.sidebar}>
         <Sidebar />
       </Box>
-      <Box className={classes.content}>Content</Box>
+      <Box className={classes.content}>
+        <Switch>
+          <Route path="/admin/dashboard" component={Dashboard} />
+          <Route path="/admin/students" component={StudentFeature} />
+        </Switch>
+      </Box>
     </Box>
   );
 }

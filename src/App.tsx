@@ -8,17 +8,15 @@ import LoginPage from "./features/auth/pages/LoginPage";
 
 function App() {
   return (
-    <div>
-      <Switch>
-        <Route path="/login" component={LoginPage} />
+    <Switch>
+      <Route path="/login" component={LoginPage} />
 
-        <PrivateRoute>
-          <Route path="/admin" component={AdminLayout} />
-        </PrivateRoute>
+      <PrivateRoute>
+        <Route path="/admin" component={AdminLayout} />
+      </PrivateRoute>
 
-        <Route path="*" component={NotFound} />
-      </Switch>
-    </div>
+      <Route path="*" component={NotFound} />
+    </Switch>
   );
 }
 

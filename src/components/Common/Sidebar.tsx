@@ -7,28 +7,47 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
+import { NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  link: {
+    color: "inherit",
+    textDecoration: "none",
+
+    "&.active > div": {
+      backgroundColor: theme.palette.action.selected,
+    },
+  },
+}));
 
 export function Sidebar() {
+  const classes = useStyles();
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       <nav aria-label="main mailbox folders">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <GroupIcon />
-              </ListItemIcon>
-              <ListItemText primary="Students" />
-            </ListItemButton>
-          </ListItem>
+        <List sx={{ padding: 0 }}>
+          <NavLink to="/admin/dashboard" className={classes.link}>
+            <ListItem disablePadding button>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
+
+          <NavLink to="/admin/students" className={classes.link}>
+            <ListItem disablePadding button>
+              <ListItemButton>
+                <ListItemIcon>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText primary="Students" />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
         </List>
       </nav>
     </Box>
