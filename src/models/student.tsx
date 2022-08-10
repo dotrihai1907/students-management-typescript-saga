@@ -4,8 +4,7 @@ export interface Student {
   age: number;
   marks: number;
   gender: "male" | "female";
-  city: string;
-
   createdAt?: number;
   updatedAt?: number;
+  city: string;
 }

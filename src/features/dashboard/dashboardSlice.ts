@@ -67,13 +67,15 @@ const dashboardSlice = createSlice({
 export const dashboardAtions = dashboardSlice.actions;
 
 //Selectors
+export const selectLoading = (state: RootState) => state.dashboard.loading;
+
 export const selectStatistics = (state: RootState) =>
   state.dashboard.statistics;
 
-export const selectHighestStudentList = (state: RootState) =>
+export const selectHighestStudentsList = (state: RootState) =>
   state.dashboard.highestStudentsList;
 
-export const selectLowestStudentList = (state: RootState) =>
+export const selectLowestStudentsList = (state: RootState) =>
   state.dashboard.lowestStudentsList;
 
 export const selectRankingByCityList = (state: RootState) =>
