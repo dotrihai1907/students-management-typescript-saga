@@ -9,10 +9,12 @@ import createSagaMiddleware from "redux-saga";
 import authReducer from "../features/auth/authSlice";
 import rootSaga from "./rootSaga";
 import { history } from "../utils";
+import dashboardReducer from "../features/dashboard/dashboardSlice";
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
   auth: authReducer,
+  dashboard: dashboardReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
