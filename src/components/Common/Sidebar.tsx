@@ -11,6 +11,11 @@ import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
   link: {
     color: "inherit",
     textDecoration: "none",
@@ -24,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export function Sidebar() {
   const classes = useStyles();
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <Box className={classes.root}>
       <nav aria-label="main mailbox folders">
         <List sx={{ padding: 0 }}>
           <NavLink to="/admin/dashboard" className={classes.link}>

@@ -32,3 +32,26 @@ LOGIN
 LOGOUT
 - clear token from local storage
 - redirect to login page
+
+### Students
+
+ROUTINGS
+- /admin/students: listing
+- /admin/students/add: add new student
+- admin/students/:studentId: update a student
+
+LISTING
+- search by name
+- filter by city
+- sort by name, mark
+- pagination
+
+student slice state:
+- loading
+- list
+- filter {page: 1, limit: 10, ... }
+- pagination
+
+ADD/EDIT
+- react hook form v7
+- yup
