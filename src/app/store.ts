@@ -10,11 +10,13 @@ import authReducer from "../features/auth/authSlice";
 import rootSaga from "./rootSaga";
 import { history } from "../utils";
 import dashboardReducer from "../features/dashboard/dashboardSlice";
+import studentReducer from "../features/student/studentSlice";
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
   auth: authReducer,
   dashboard: dashboardReducer,
+  student: studentReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
