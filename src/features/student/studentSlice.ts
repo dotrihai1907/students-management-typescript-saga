@@ -9,9 +9,9 @@ import {
 
 export interface StudentState {
   loading: boolean;
-  list?: Student[];
-  filter?: ListParams;
-  pagination?: PaginationParams;
+  list: Student[];
+  filter: ListParams;
+  pagination: PaginationParams;
 }
 
 const initialState: StudentState = {
@@ -60,7 +60,8 @@ export const studentActions = studentSlice.actions;
 export const selectStudentList = (state: RootState) => state.student.list;
 export const selectStudentLoadin = (state: RootState) => state.student.loading;
 export const selectStudentFilter = (state: RootState) => state.student.filter;
-export const selectStudentPagiantion = (state: RootState) => state.student.pagination;
+export const selectStudentPagiantion = (state: RootState) =>
+  state.student.pagination;
 
 //reducer
 const studentReducer = studentSlice.reducer;
