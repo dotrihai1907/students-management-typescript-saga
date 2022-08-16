@@ -58,7 +58,7 @@ export const studentActions = studentSlice.actions;
 
 //selectors
 export const selectStudentList = (state: RootState) => state.student.list;
-export const selectStudentLoadin = (state: RootState) => state.student.loading;
+export const selectStudentLoading = (state: RootState) => state.student.loading;
 export const selectStudentFilter = (state: RootState) => state.student.filter;
 export const selectStudentPagiantion = (state: RootState) =>
   state.student.pagination;

@@ -47,7 +47,6 @@ export default function StudentTable({
                 <Button
                   sx={{ marginRight: "6px" }}
                   size="small"
-                  variant="contained"
                   color="primary"
                   onClick={() => handleEdit(student)}
                 >
@@ -55,7 +54,6 @@ export default function StudentTable({
                 </Button>
                 <Button
                   size="small"
-                  variant="outlined"
                   color="secondary"
                   onClick={() => handleRemove(student)}
                 >
