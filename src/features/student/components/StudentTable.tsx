@@ -6,7 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Student } from "../../../models";
-import { Button, Paper } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
+import { captializeString, getMarkColor } from "../../../utils";
 
 export interface StudentTableProps {
   studentList: Student[];
@@ -38,10 +39,14 @@ export default function StudentTable({
               key={student.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell>{student.id}</TableCell>
+              <TableCell width={200}>{student.id}</TableCell>
               <TableCell>{student.name}</TableCell>
-              <TableCell>{student.gender}</TableCell>
-              <TableCell>{student.mark}</TableCell>
+              <TableCell>{captializeString(student.gender)}</TableCell>
+              <TableCell>
+                <Box fontWeight="bold" color={getMarkColor(student.mark)}>
+                  {student.mark}
+                </Box>
+              </TableCell>
               <TableCell>{student.city}</TableCell>
               <TableCell align="right">
                 <Button
