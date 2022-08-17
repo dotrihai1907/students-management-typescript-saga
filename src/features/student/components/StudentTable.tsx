@@ -5,18 +5,22 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Student } from "../../../models";
+import { City, Student } from "../../../models";
 import { Box, Button, Paper } from "@mui/material";
 import { captializeString, getMarkColor } from "../../../utils";
 
 export interface StudentTableProps {
   studentList: Student[];
+  cityMap: {
+    [key: string]: City;
+  };
   handleEdit: (student: Student) => void;
   handleRemove: (student: Student) => void;
 }
 
 export default function StudentTable({
   studentList,
+  cityMap,
   handleEdit,
   handleRemove,
 }: StudentTableProps) {
@@ -47,7 +51,7 @@ export default function StudentTable({
                   {student.mark}
                 </Box>
               </TableCell>
-              <TableCell>{student.city}</TableCell>
+              <TableCell>{cityMap[student.city]?.name}</TableCell>
               <TableCell align="right">
                 <Button
                   sx={{ marginRight: "6px" }}

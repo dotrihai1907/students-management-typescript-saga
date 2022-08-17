@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { selectCityMap } from "../../city/citySlice";
 import StudentTable from "../components/StudentTable";
 import {
   selectStudentFilter,
@@ -45,13 +46,14 @@ export default function ListPage() {
   const pagination = useAppSelector(selectStudentPagiantion);
   const filter = useAppSelector(selectStudentFilter);
   const loading = useAppSelector(selectStudentLoading);
+  const cityMap = useAppSelector(selectCityMap);
 
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(studentActions.fetchStudentList(filter));
-  }, [filter]);
+  }, [filter, dispatch]);
 
   const handleRemove = () => {};
   const handleEdit = () => {};
@@ -76,14 +78,13 @@ export default function ListPage() {
           </Button>
         </Box>
 
-        {/*student table */}
         <StudentTable
           studentList={studentList}
+          cityMap={cityMap}
           handleRemove={handleRemove}
           handleEdit={handleEdit}
         />
 
-        {/*pagination */}
         <Box my={2} sx={{ display: "flex", justifyContent: "center" }}>
           <Pagination
             color="primary"
