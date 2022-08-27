@@ -48,7 +48,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(dashboardAtions.fetchData());
-  }, []);
+  }, [dispatch]);
   return (
     <Box className={classes.root}>
       {/*loading section */}

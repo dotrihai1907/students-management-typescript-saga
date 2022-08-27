@@ -8,7 +8,9 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { selectCityMap } from "../../city/citySlice";
+import { ListParams } from "../../../models";
+import { selectCityList, selectCityMap } from "../../city/citySlice";
+import StudentFilters from "../components/StudentFilters";
 import StudentTable from "../components/StudentTable";
 import {
   selectStudentFilter,
@@ -47,6 +49,7 @@ export default function ListPage() {
   const filter = useAppSelector(selectStudentFilter);
   const loading = useAppSelector(selectStudentLoading);
   const cityMap = useAppSelector(selectCityMap);
+  const cityList = useAppSelector(selectCityList);
 
   const classes = useStyles();
   const dispatch = useAppDispatch();
@@ -67,6 +70,10 @@ export default function ListPage() {
     );
   };
 
+  const handleSearchChange = (newFilter: ListParams) => {
+    dispatch(studentActions.setFilterWithDebouce(newFilter));
+  };
+
   return (
     <Box className={classes.root}>
       {loading && <LinearProgress className={classes.loading} />}
@@ -76,6 +83,14 @@ export default function ListPage() {
           <Button variant="contained" color="primary">
             Add new student
           </Button>
+        </Box>
+
+        <Box mb={3}>
+          <StudentFilters
+            filter={filter}
+            cityList={cityList}
+            onSearchChange={handleSearchChange}
+          />
         </Box>
 
         <StudentTable

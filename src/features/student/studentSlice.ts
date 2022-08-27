@@ -50,6 +50,7 @@ const studentSlice = createSlice({
     setFilter(state, action: PayloadAction<ListParams>) {
       state.filter = action.payload;
     },
+    setFilterWithDebouce(state, action: PayloadAction<ListParams>) {},
   },
 });
 
