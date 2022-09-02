@@ -47,6 +47,18 @@ export default function StudentFilters({
     onChange(newFilter);
   };
 
+  const handleSortChange = (e: SelectChangeEvent) => {
+    if (!onChange) return;
+    const value = e.target.value as string;
+    const [_sort, _order] = value.split(".");
+    const newFilter: ListParams = {
+      ...filter,
+      _sort: _sort || undefined,
+      _order: (_order as "asc" | "desc") || undefined,
+    };
+    onChange(newFilter);
+  };
+
   return (
     <Box>
       <Grid container spacing={3}>
@@ -80,6 +92,26 @@ export default function StudentFilters({
                   {city.name}
                 </MenuItem>
               ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} md={6} lg={3}>
+          <FormControl fullWidth size="small" sx={{ m: 1 }}>
+            <InputLabel id="sort-by">Sort</InputLabel>
+            <Select
+              labelId="sort-by"
+              label="Sort"
+              onChange={handleSortChange}
+              value={filter._sort ? `${filter._sort}.${filter._order}` : ""}
+            >
+              <MenuItem value="">
+                <em>No sort</em>
+              </MenuItem>
+              <MenuItem value="name.asc">Name ascending</MenuItem>
+              <MenuItem value="name.desc">Name decreasing</MenuItem>
+              <MenuItem value="mark.asc">Mark ascending</MenuItem>
+              <MenuItem value="mark.desc">Mark descending</MenuItem>
             </Select>
           </FormControl>
         </Grid>

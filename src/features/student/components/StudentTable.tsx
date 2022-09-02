@@ -24,6 +24,8 @@ export default function StudentTable({
   handleEdit,
   handleRemove,
 }: StudentTableProps) {
+  console.log(studentList);
+  console.log(cityMap);
   return (
     <TableContainer component={Paper}>
       <Table size="small">
@@ -51,7 +53,17 @@ export default function StudentTable({
                   {student.mark}
                 </Box>
               </TableCell>
-              <TableCell>{cityMap[student.city]?.name}</TableCell>
+              <TableCell>
+                {student.city === "hn"
+                  ? "Hà Nội"
+                  : null || student.city === "hcm"
+                  ? "Hồ Chí Minh"
+                  : null || student.city === "dn"
+                  ? "Đà Nằng"
+                  : null || student.city === "pt"
+                  ? "Phan Thiết"
+                  : null || "Unknown"}
+              </TableCell>
               <TableCell align="right">
                 <Button
                   sx={{ marginRight: "6px" }}

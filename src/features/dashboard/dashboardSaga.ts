@@ -57,7 +57,7 @@ function* fetchLowestStudentsList() {
     _page: 1,
     _limit: 5,
     _sort: "mark",
-    _order: "arc",
+    _order: "asc",
   });
 
   yield put(dashboardAtions.setLowestStudentList(data));

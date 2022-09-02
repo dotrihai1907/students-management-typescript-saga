@@ -8,3 +8,4 @@ export const getMarkColor = (mark: number): string => {
   if (mark >= 4) return "goldenrod";
   return "red";
 };
+
