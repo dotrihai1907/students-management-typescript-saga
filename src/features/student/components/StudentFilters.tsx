@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   Grid,
   InputLabel,
@@ -27,6 +28,8 @@ export default function StudentFilters({
   onChange,
   onSearchChange,
 }: StudentFiltersProps) {
+  const searchRef = React.useRef<HTMLInputElement>();
+
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!onSearchChange) return;
     const newFilter: ListParams = {
@@ -59,6 +62,22 @@ export default function StudentFilters({
     onChange(newFilter);
   };
 
+  const handleClearFilter = () => {
+    if (!onChange) return;
+    const newFilter: ListParams = {
+      ...filter,
+      _page: 1,
+      _sort: undefined,
+      _order: undefined,
+      city: undefined,
+      name_like: undefined,
+    };
+    onChange(newFilter);
+    if (searchRef.current) {
+      searchRef.current.value = "";
+    }
+  };
+
   return (
     <Box>
       <Grid container spacing={3}>
@@ -66,10 +85,12 @@ export default function StudentFilters({
           <FormControl fullWidth sx={{ m: 1 }} size="small">
             <InputLabel htmlFor="searchByName">Search by name</InputLabel>
             <OutlinedInput
+              inputRef={searchRef}
               onChange={handleSearchChange}
               label="Search by name"
               id="searchByName"
               endAdornment={<SearchIcon />}
+              defaultValue={filter.name_like}
             />
           </FormControl>
         </Grid>
@@ -96,7 +117,7 @@ export default function StudentFilters({
           </FormControl>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={6} lg={2}>
           <FormControl fullWidth size="small" sx={{ m: 1 }}>
             <InputLabel id="sort-by">Sort</InputLabel>
             <Select
@@ -114,6 +135,17 @@ export default function StudentFilters({
               <MenuItem value="mark.desc">Mark descending</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+
+        <Grid item xs={12} md={6} lg={1}>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ m: 1 }}
+            onClick={handleClearFilter}
+          >
+            Clear
+          </Button>
         </Grid>
       </Grid>
     </Box>

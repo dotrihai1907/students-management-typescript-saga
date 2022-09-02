@@ -11,21 +11,15 @@ import { captializeString, getMarkColor } from "../../../utils";
 
 export interface StudentTableProps {
   studentList: Student[];
-  cityMap: {
-    [key: string]: City;
-  };
   handleEdit: (student: Student) => void;
   handleRemove: (student: Student) => void;
 }
 
 export default function StudentTable({
   studentList,
-  cityMap,
   handleEdit,
   handleRemove,
 }: StudentTableProps) {
-  console.log(studentList);
-  console.log(cityMap);
   return (
     <TableContainer component={Paper}>
       <Table size="small">

@@ -100,7 +100,6 @@ export default function ListPage() {
 
         <StudentTable
           studentList={studentList}
-          cityMap={cityMap}
           handleRemove={handleRemove}
           handleEdit={handleEdit}
         />
