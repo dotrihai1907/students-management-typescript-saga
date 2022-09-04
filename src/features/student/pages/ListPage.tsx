@@ -7,10 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
+import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
 import studentApi from "../../../api/studentApi";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { ListParams, Student } from "../../../models";
-import { selectCityList, selectCityMap } from "../../city/citySlice";
+import { selectCityList } from "../../city/citySlice";
 import StudentFilters from "../components/StudentFilters";
 import StudentTable from "../components/StudentTable";
 import {
@@ -53,12 +54,11 @@ export default function ListPage() {
 
   const classes = useStyles();
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(studentActions.fetchStudentList(filter));
   }, [filter, dispatch]);
-
-  const handleEdit = () => {};
 
   const handlePageChange = (e: any, page: number) => {
     dispatch(
@@ -86,15 +86,21 @@ export default function ListPage() {
     }
   };
 
+  const handleEditStudent = (student: Student) => {
+    history.push(`/admin/students/${student.id}`);
+  };
+
   return (
     <Box className={classes.root}>
       {loading && <LinearProgress className={classes.loading} />}
       <Box className={classes.content}>
         <Box className={classes.titleContainer}>
           <Typography variant="h4">Students</Typography>
-          <Button variant="contained" color="primary">
-            Add new student
-          </Button>
+          <NavLink to="/admin/students/add" style={{ textDecoration: "none" }}>
+            <Button variant="contained" color="primary">
+              Add new student
+            </Button>
+          </NavLink>
         </Box>
 
         <Box mb={3}>
@@ -109,7 +115,7 @@ export default function ListPage() {
         <StudentTable
           studentList={studentList}
           handleRemove={handleRemoveStudent}
-          handleEdit={handleEdit}
+          handleEdit={handleEditStudent}
         />
 
         <Box my={2} sx={{ display: "flex", justifyContent: "center" }}>
