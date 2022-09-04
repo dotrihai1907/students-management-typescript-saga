@@ -7,8 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
+import studentApi from "../../../api/studentApi";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { ListParams } from "../../../models";
+import { ListParams, Student } from "../../../models";
 import { selectCityList, selectCityMap } from "../../city/citySlice";
 import StudentFilters from "../components/StudentFilters";
 import StudentTable from "../components/StudentTable";
@@ -48,7 +49,6 @@ export default function ListPage() {
   const pagination = useAppSelector(selectStudentPagiantion);
   const filter = useAppSelector(selectStudentFilter);
   const loading = useAppSelector(selectStudentLoading);
-  const cityMap = useAppSelector(selectCityMap);
   const cityList = useAppSelector(selectCityList);
 
   const classes = useStyles();
@@ -58,7 +58,6 @@ export default function ListPage() {
     dispatch(studentActions.fetchStudentList(filter));
   }, [filter, dispatch]);
 
-  const handleRemove = () => {};
   const handleEdit = () => {};
 
   const handlePageChange = (e: any, page: number) => {
@@ -76,6 +75,15 @@ export default function ListPage() {
 
   const handleFilterChange = (newFilter: ListParams) => {
     dispatch(studentActions.setFilter(newFilter));
+  };
+
+  const handleRemoveStudent = async (student: Student) => {
+    try {
+      await studentApi.remove(student?.id || "");
+      dispatch(studentActions.setFilter({ ...filter }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -100,7 +108,7 @@ export default function ListPage() {
 
         <StudentTable
           studentList={studentList}
-          handleRemove={handleRemove}
+          handleRemove={handleRemoveStudent}
           handleEdit={handleEdit}
         />
 
