@@ -7,7 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import studentApi from "../../../api/studentApi";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { ListParams, Student } from "../../../models";
@@ -80,6 +81,9 @@ export default function ListPage() {
   const handleRemoveStudent = async (student: Student) => {
     try {
       await studentApi.remove(student?.id || "");
+
+      toast.success("Remove student successfully!");
+
       dispatch(studentActions.setFilter({ ...filter }));
     } catch (error) {
       console.log(error);

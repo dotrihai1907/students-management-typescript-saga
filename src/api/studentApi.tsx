@@ -11,8 +11,8 @@ const studentApi = {
   add(data: Student): Promise<Student> {
     return axiosClient.post("/students", data);
   },
-  update(data: Student): Promise<Student> {
-    return axiosClient.patch("/students", data);
+  update(data: Partial<Student>): Promise<Student> {
+    return axiosClient.patch(`/students/${data.id}`, data);
   },
   remove(id: string): Promise<any> {
     return axiosClient.delete(`/students/${id}`);
