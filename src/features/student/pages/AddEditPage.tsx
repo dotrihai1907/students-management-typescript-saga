@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { ChevronLeft } from "@mui/icons-material";
 import { Student } from "../../../models";
 import studentApi from "../../../api/studentApi";
+import StudentForm from "../components/StudentForm";
 
 export default function AddEditPage() {
   const { studentId } = useParams<{ studentId: string }>();
@@ -11,6 +12,17 @@ export default function AddEditPage() {
   const isEdit = Boolean(studentId);
 
   const [student, setStudent] = useState<Student>();
+
+  const initialValues: Student = {
+    name: "",
+    age: "",
+    mark: "",
+    gander: "male",
+    city: "",
+    ...student,
+  } as Student;
+
+  const handleStudentFormSubmit = (formValues: Student) => {};
 
   useEffect(() => {
     if (!studentId) return;
@@ -38,6 +50,16 @@ export default function AddEditPage() {
       <Typography variant="h4">
         {isEdit ? "Update student info" : "Add new student"}
       </Typography>
+
+      {!isEdit ||
+        (Boolean(student) && (
+          <Box mt={3}>
+            <StudentForm
+              initialValues={initialValues}
+              onSubmit={handleStudentFormSubmit} 
+            />
+          </Box>
+        ))}
     </Box>
   );
 }
